@@ -6,6 +6,7 @@ A instalação se dá manualmente. Até o momento, não construímos a instalaç
 ## Manuais online
 
 https://ati-seplag.gitbook.io/processos-seletivos-candidatos/: Candidatos
+
 https://ati-seplag.gitbook.io/processos-seletivos-gestores-e-avaliadores/: Gestores e avaliadores
 
 
