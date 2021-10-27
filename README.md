@@ -14,7 +14,7 @@ https://ati-seplag.gitbook.io/processos-seletivos-gestores-e-avaliadores/: Gesto
 
 ## SMTP
 
-O sistema é bastante dependente de disparos de e-mails. O sistema está utilizando o SMTP para realizar o envio de email. Como isso é uma parte central do sistema, o desenvolvedor deve alterar as credenciais utilizadas para um servidor na qual ele tenha controle no arquivo '/application/config/custom.php'.
+O sistema é bastante dependente de disparos de e-mails. O sistema está utilizando o SMTP para realizar o envio de email. Como isso é uma parte central do sistema, o desenvolvedor deve alterar as credenciais utilizadas para um servidor na qual ele tenha controle no arquivo 'application/config/custom.php'.
 
 
 ## Criptografia das senhas no banco
@@ -26,6 +26,7 @@ O CodeIgniter, framework utilizado na construção do sistema, utiliza uma bibli
 No script de criação da estrutura do banco de dados existe a criação de um usuário inicial: 
  
 Login: 99999999999
+
 Senha: teste123
 
 
