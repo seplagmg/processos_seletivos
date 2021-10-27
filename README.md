@@ -1,5 +1,7 @@
 Bem vindos ao sistema de Processos Seletivos Simplificados. Este é um sistema construído em PHP/MySQL para apoiar a realização desses processos no setor público. Este sistema foi criado pela Secretaria de Estado de Planejamento e Gestão do Governo de Minas Gerais. O sistema foi construído usando o framework CodeIgniter 3, com alguns frameworks abertos de javascript.
 
+O endereço de produção é https://www.processoseletivo.mg.gov.br/.
+
 A instalação se dá manualmente. Até o momento, não construímos a instalação via docker para ele. A homologação desta instalação se deu em um ambiente Debian 10. Para outros ambientes o desenvolvedor irá precisar adaptar alguns dos passos e dependências utilizadas.
 
 
