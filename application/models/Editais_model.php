@@ -5,9 +5,12 @@ class Editais_model extends CI_Model {
         function __construct() {
                 parent::__construct();
         }
-        public function get_editais($id='',$publicado=true,$inativo = false){
+        public function get_editais($id='',$publicado=true,$soativo = false){
                 if(strlen($id) > 0){
                         $this -> db -> where('pr_edital', $id);
+                }
+                if($soativo == true){
+                        $this -> db -> where("bl_inativo is null or bl_inativo = '0'");
                 }
                 //validação para o órgão
                 if($this -> session -> perfil == 'orgaos'){

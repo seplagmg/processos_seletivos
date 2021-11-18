@@ -26,10 +26,10 @@ class Editais extends CI_Controller {
                 $dados['sucesso'] = '';
                 $dados['adicionais'] = array('datatables' => true,'sweetalert' => true);
                 if($inativo == '1'){
-                        $dados['editais'] = $this -> Editais_model -> get_editais('',false,true);
+                        $dados['editais'] = $this -> Editais_model -> get_editais('',false);
                 }
                 else{
-                        $dados['editais'] = $this -> Editais_model -> get_editais('',false);
+                        $dados['editais'] = $this -> Editais_model -> get_editais('',false,true);
                 }
                 
                 $dados['inativo'] = $inativo;
