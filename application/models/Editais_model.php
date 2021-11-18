@@ -5,7 +5,7 @@ class Editais_model extends CI_Model {
         function __construct() {
                 parent::__construct();
         }
-        public function get_editais($id='',$publicado=true){
+        public function get_editais($id='',$publicado=true,$inativo = false){
                 if(strlen($id) > 0){
                         $this -> db -> where('pr_edital', $id);
                 }
