@@ -312,10 +312,10 @@ if($menu2 == 'index'){
                                                     }
                                                     function check_inativo(){
                                                             if(document.getElementById('inativo').checked == true){
-                                                                    $(location).attr('href', '".base_url('Usuarios/index/')."1')
+                                                                    $(location).attr('href', '".base_url('Editais/index/')."1')
                                                             }
                                                             else{
-                                                                    $(location).attr('href', '".base_url('Usuarios/index/')."')
+                                                                    $(location).attr('href', '".base_url('Editais/index/')."')
                                                             }
                                                     }
                                             </script>
