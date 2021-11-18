@@ -203,7 +203,6 @@ foreach($questoes1 as $linha){
         }
         else if($linha -> vc_respostaAceita == NULL || $linha -> in_tipo == 2){
 
-
         }*/
 
 
