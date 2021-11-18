@@ -963,22 +963,8 @@ else if(strlen($sucesso) > 0){
                         </script>
                         <script type=\"text/javascript\">
                             $(document).ready(function(){
-									";
-		/*if($navegar == 1){
-
-				$pagina['js'].="
-									$('html, body').animate({
-										scrollTop: $('#botoes_experiencia').offset().top
-									}, 'fast');";
-
-		}
-        for($i = 1; $i <= $num_formacao; $i++){
-                $pagina['js'].="
-                                    $('#div_carga_horaria{$i}').hide();
-                ";
-        }*/
-		$pagina['js'].="
                                     $('#CPF').inputmask('999.999.999-99');
+                                    
                                     $('#DataNascimento').inputmask('99/99/9999');
 
                                     $('#CEP').inputmask('99999-999');

@@ -224,11 +224,7 @@ else if($menu2 == 'recuperar'){
 
 echo "                              </div>
                                 </div>
-                                <div class=\"row\">
-                                    <div class=\"column mx-auto mt-3\"\">
-                                            <span style=\"font-size:1.1em;\">SUGESP - SEPLAG © Layout Adminty</span>
-                                    </div>
-                                </div>
+                                
                         </form>
                     </div>
                 </div>

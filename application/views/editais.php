@@ -127,7 +127,7 @@ if($menu2 == 'index' && ($this -> session -> perfil == 'administrador' || $this 
 else if(($menu2 == 'create') && ($sucesso != '' && $erro != '')){
         echo "
                                                                     <div class=\"col-lg-4 text-right\">
-                                                                            <button type=\"button\" class=\"btn btn-primary\" onclick=\"document.getElementById('form_usuarios').submit();\"> Salvar </button>
+                                                                            <button type=\"button\" class=\"btn btn-primary\" onclick=\"document.getElementById('from_editais').submit();\"> Salvar </button>
                                                                             <button type=\"button\" class=\"btn btn-default\" onclick=\"window.location='".base_url('Editais/index')."'\">Cancelar</button>
                                                                     </div>";
 }
@@ -139,7 +139,7 @@ if($menu2 == 'index'){
         echo "
                                                             <div class=\"dt-responsive table-responsive\">
                                                                     <input type=\"checkbox\" id=\"inativo\" onclick=\"check_inativo()\" style=\"margin: 10px 10px 20px 0px; line-height:1.5em;\" ".($inativo == 1? "checked=\"checked\" ":"")." /><span style=\"position:relative; top:-2px; line-height:1.5em;\">Mostrar inativos</span>
-                                                                    <table id=\"usuarios_table\" class=\"table table-striped table-bordered table-hover\">
+                                                                    <table id=\"editais_table\" class=\"table table-striped table-bordered table-hover\">
                                                                             <thead>
                                                                                     <tr>
                                                                                             <th>Nome do Edital</th>
@@ -152,7 +152,7 @@ if($menu2 == 'index'){
                                                                                     </tr>
                                                                             </thead>
                                                                             <tbody>";
-        //var_dump($usuarios);
+        
         if(isset($editais)){
                 $atual = time();
                 foreach ($editais as $linha){
@@ -235,9 +235,7 @@ if($menu2 == 'index'){
                                         }*/
                                 }
 
-                                //echo anchor('Usuarios/edit/'.$linha -> pr_edital, '<i class="fa fa-arrow-up"> Publicar</i>', " class=\"btn btn-sm btn-square btn-primary\" title=\"Editar\"");
-
-                                //echo "<button type=\"button\" class=\"btn btn-sm btn-square btn-danger alert-confirm\" title=\"Desativar usuário\" onclick=\"confirm_delete(".$linha -> pr_edital.");\"><i class=\"fa fa-lg fa-times-circle mr-0\"></i></a>";
+                                
 
 
                         /*}
@@ -259,57 +257,7 @@ if($menu2 == 'index'){
                                                     </div>";
         $pagina['js'] = "
                                             <script type=\"text/javascript\">
-                                                    function confirm_senha(id){
-                                                            $(document).ready(function(){
-                                                                    swal.fire({
-                                                                        title: 'Você confirma o envio de nova senha?',
-                                                                        text: 'Será enviada uma nova senha para o e-mail do usuario.',
-                                                                        type: 'info',
-                                                                        showCancelButton: true,
-                                                                        cancelButtonText: 'Não, cancele',
-                                                                        confirmButtonText: 'Sim, envie'
-                                                                    })
-                                                                    .then(function(result) {
-                                                                        if (result.value) {
-                                                                            $(location).attr('href', '".base_url('Usuarios/novaSenha/')."' + id)
-                                                                        }
-                                                                    });
-                                                            });
-                                                    }
-                                                    function confirm_delete(id){
-                                                            $(document).ready(function(){
-                                                                    swal.fire({
-                                                                        title: 'Você confirma essa desativação?',
-                                                                        text: 'O usuário perderá o acesso e seu CPF ficará como inativo.',
-                                                                        type: 'warning',
-                                                                        showCancelButton: true,
-                                                                        cancelButtonText: 'Não, cancele',
-                                                                        confirmButtonText: 'Sim, desative'
-                                                                    })
-                                                                    .then(function(result) {
-                                                                        if (result.value) {
-                                                                            $(location).attr('href', '".base_url('Usuarios/delete/')."' + id)
-                                                                        }
-                                                                    });
-                                                            });
-                                                    }
-                                                    function confirm_reactivate(id){
-                                                            $(document).ready(function(){
-                                                                    swal.fire({
-                                                                        title: 'Você confirma essa reativação?',
-                                                                        text: 'O usuário voltará a ter acesso e receberá um e-mail com nova senha.',
-                                                                        type: 'warning',
-                                                                        showCancelButton: true,
-                                                                        cancelButtonText: 'Não, cancele',
-                                                                        confirmButtonText: 'Sim, reative'
-                                                                    })
-                                                                    .then(function(result) {
-                                                                        if (result.value) {
-                                                                            $(location).attr('href', '".base_url('Usuarios/reactivate/')."' + id)
-                                                                        }
-                                                                    });
-                                                            });
-                                                    }
+                                                    
                                                     function check_inativo(){
                                                             if(document.getElementById('inativo').checked == true){
                                                                     $(location).attr('href', '".base_url('Editais/index/')."1')
@@ -320,7 +268,7 @@ if($menu2 == 'index'){
                                                     }
                                             </script>
                                             <script type=\"text/javascript\">
-                                                    $('#usuarios_table').DataTable({
+                                                    $('#editais_table').DataTable({
 
 
                                                         'pageLength': 15,
@@ -702,7 +650,7 @@ else if($menu2 == 'publicar' || $menu2 == 'edit'){
                                                             </div>";
         }
         if(strlen($sucesso) == 0){
-                $attributes = array('id' => 'form_usuarios');
+                $attributes = array('id' => 'from_editais');
                 //if($menu2 == 'publicar' && isset($codigo) && $codigo > 0){
                         echo form_open($url, $attributes, array('codigo' => $codigo));
                 /*}
