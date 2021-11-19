@@ -5527,16 +5527,8 @@ Para cada Produção Científica a ser inserida siga os passos a seguir:</br></b
                 }
                 $this->load->library('email');
 
-                $config['protocol'] = 'smpt';
-                $config['charset'] = 'UTF-8';
-                $config['smtp_port'] = 25;
-                $config['smtp_host'] = $this -> config -> item('smtp_host');
-                $config['smtp_user'] = $this -> config -> item('smtp_user');
-                $config['smtp_pass'] = $this -> config -> item('smtp_pass');
-
-                $config['wordwrap'] = TRUE;
-
-                $config['mailtype'] = 'html';
+                $this->load->helper('emails');
+                $config = getEmailEnvConfigs();
 
                 $this->email->initialize($config);
 

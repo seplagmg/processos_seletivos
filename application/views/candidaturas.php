@@ -280,7 +280,7 @@ else{
                 if($menu2 != 'Questionario' || (strlen($sucesso) == 0 || (!isset($_POST['cadastrar']) || $_POST['cadastrar'] != 'Concluir'))){
 
 
-                echo "
+                        echo "
                                                                             <div class=\"steps clearfix\">
                                                                                 <ul role=\"tablist\">";
                         if($menu2 == 'create'){
@@ -339,7 +339,8 @@ else{
                                                                                     </li>
                                                                                 </ul>
                                                                             </div>
-                                                                            ";
+                                                                                ";
+                        }
                 }
         }
         echo "
@@ -1995,7 +1996,7 @@ else{
 																																												}
 																					});
 																			</script>
-				";
+                        ";
         }
         else if($menu2 == 'TesteAderencia'){ //Teste de aderência
 
@@ -2018,7 +2019,7 @@ else{
                         echo "
                                                                                         <button type=\"reset\" class=\"btn btn-default\" onclick=\"window.location='".base_url('Candidaturas/index')."';\">Cancelar</button>";
 
-                        echo "
+                         echo "
                                                                             </div>
                                                                         </form>
 
@@ -2032,7 +2033,7 @@ else{
 
                 }
         }
-		/*else{
+                /*else{
 				echo "
                                                 <div class=\"kt-portlet__body\">";
 				if(strlen($erro)>0){
@@ -2061,6 +2062,7 @@ else{
 												</div>";
 				}
 		}*/
+        
 
 }
 

@@ -852,6 +852,7 @@ class Candidatos extends CI_Controller {
                 $this -> load -> model('Usuarios_model');
                 $this -> load -> library('email');
                 $this -> load -> helper('string');
+                $this -> load -> helper('emails_helper');
                 $this -> load -> library('encryption');
 
                 $pagina['menu1']='Candidatos';
@@ -878,24 +879,17 @@ class Candidatos extends CI_Controller {
                         $this -> Usuarios_model -> update_usuario('vc_senha_temporaria', $password, $usuario);
                         $this -> Usuarios_model -> update_usuario('dt_alteracao', date('Y-m-d H:i:s'), $usuario);
 
-                        $config['protocol'] = 'smpt';
-                        $config['charset'] = 'UTF-8';
-                        $config['smtp_port'] = 25;
-                        $config['smtp_host'] = $this -> config -> item('smtp_host');
-                        $config['smtp_user'] = $this -> config -> item('smtp_user');
-                        $config['smtp_pass'] = $this -> config -> item('smtp_pass');
+                        /*$this->load->helper('emails');
+                        $config = getEmailEnvConfigs();
 
-                        $config['wordwrap'] = TRUE;
-
-                        $config['mailtype'] = 'html';
 
                         $this->email->initialize($config);
 
                         $this -> email -> from($this -> config -> item('email'), $this -> config -> item('nome'));
                         $this -> email -> to($dados['usuario'] -> vc_email);
                         $this -> email -> subject('['.$this -> config -> item('nome').'] Nova senha');
-                        //$msg='Olá '.$dados['usuario'] -> vc_nome.',<br/><br/>Foi solicitada uma nova senha do sistema do programa '.$this -> config -> item('nome').'. Seus dados para acesso são:<br/><br/>Usuário: '.$dados['usuario'] -> vc_login."<br/>Senha inicial: $senha<br/><br/>Se não foi você que solicitou essa recuperação de senha, não se preocupe pois sua senha antiga ainda funciona.<br/><br/>Acesse o sistema por meio do link: ".base_url();
-                        $this -> email -> message($msg);
+                        $msg='Olá '.$dados['usuario'] -> vc_nome.',<br/><br/>Foi solicitada uma nova reativação do programa '.$this -> config -> item('nome').'. Seus dados para acesso são:<br/><br/>Usuário: '.$dados['usuario'] -> vc_login."<br/>Senha inicial: $senha<br/><br/>Se não foi você que solicitou essa recuperação de senha, não se preocupe pois sua senha antiga ainda funciona.<br/><br/>Acesse o sistema por meio do link: ".base_url();
+                        $this -> email -> message($msg);*/
                         if(!$this -> envio_email($dados,$senha,$dados_candidato,'alteracao')){
                                 $this -> Usuarios_model -> log('erro', 'Candidatos/reactivate', 'Erro de envio de e-mail com senha de cadastro para o e-mail '.$dados['usuario'] -> vc_email.' do usuário '.$dados['usuario'] -> pr_usuario, 'tb_usuarios', $usuario);
                         }
@@ -1982,16 +1976,8 @@ class Candidatos extends CI_Controller {
                         ";
                 }
 
-                $config['protocol'] = 'smpt';
-                $config['charset'] = 'UTF-8';
-                $config['smtp_port'] = 25;
-                $config['smtp_host'] = $this -> config -> item('smtp_host');
-                $config['smtp_user'] = $this -> config -> item('smtp_user');
-                $config['smtp_pass'] = $this -> config -> item('smtp_pass');
-
-                $config['wordwrap'] = TRUE;
-
-                $config['mailtype'] = 'html';
+                $this->load->helper('emails');
+                $config = getEmailEnvConfigs();
 
                 $this->email->initialize($config);
                 $this -> email -> from($this -> config -> item('email'), $this -> config -> item('nome'));

@@ -1835,7 +1835,7 @@ class Vagas extends CI_Controller {
                                 echo "
                                 <script type=\"text/javascript\">
                                         alert('Vaga liberada para preenchimento público.');
-                                        window.location='/Vagas/index';
+                                        window.location='".base_url("/Vagas/index")."';
                                 </script>";
                         }
                         else{
@@ -3274,16 +3274,8 @@ class Vagas extends CI_Controller {
 
                 $this->load->library('email');
 
-                $config['protocol'] = 'smpt';
-                $config['charset'] = 'UTF-8';
-                $config['smtp_port'] = 25;
-                $config['smtp_host'] = $this -> config -> item('smtp_host');
-                $config['smtp_user'] = $this -> config -> item('smtp_user');
-                $config['smtp_pass'] = $this -> config -> item('smtp_pass');
-
-                $config['wordwrap'] = TRUE;
-
-                $config['mailtype'] = 'html';
+                $this->load->helper('emails');
+                $config = getEmailEnvConfigs();
 
                 $this->email->initialize($config);
 
@@ -3334,16 +3326,8 @@ class Vagas extends CI_Controller {
         private function envio_email2($nome,$email,$nome_candidato,$candidatura,$data,$hora,$link){
                 $this->load->library('email');
 
-                $config['protocol'] = 'smpt';
-                $config['charset'] = 'UTF-8';
-                $config['smtp_port'] = 25;
-                $config['smtp_host'] = $this -> config -> item('smtp_host');
-                $config['smtp_user'] = $this -> config -> item('smtp_user');
-                $config['smtp_pass'] = $this -> config -> item('smtp_pass');
-
-                $config['wordwrap'] = TRUE;
-
-                $config['mailtype'] = 'html';
+                $this->load->helper('emails');
+                $config = getEmailEnvConfigs();
 
                 $this->email->initialize($config);
 
