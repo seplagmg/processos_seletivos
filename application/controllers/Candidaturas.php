@@ -2532,7 +2532,7 @@ class Candidaturas extends CI_Controller {
                 if(isset($dados['formacoes'])){
                         foreach($dados['formacoes'] as $formacao){
                                 $dados['anexos'][$formacao->pr_formacao] =  $this -> Anexos_model -> get_anexo('', $formacao->pr_formacao,'', '');
-                                if(!isset($dados['anexos'][$formacao->pr_formacao][0])){
+                                if(!isset($dados['anexos'][$formacao->pr_formacao][0]) && strlen($formacao->es_formacao_pai) > 0){
                                         $dados['anexos'][$formacao->pr_formacao] =  $this -> Anexos_model -> get_anexo('', $formacao->es_formacao_pai,'', '');
                                 }
                         }
