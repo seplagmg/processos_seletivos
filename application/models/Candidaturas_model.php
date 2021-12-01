@@ -108,10 +108,22 @@ class Candidaturas_model extends CI_Model {
                         'es_vaga' => $dados['Vaga'],
                         'es_status' => 1,
                         'dt_cadastro' => date('Y-m-d H:i:s'),
-						'dt_candidatura' => date('Y-m-d H:i:s'),
-						'dt_cadastro' => date('Y-m-d H:i:s')
+                        'dt_candidatura' => date('Y-m-d H:i:s'),
+                        'dt_cadastro' => date('Y-m-d H:i:s')
                 );
                 $this -> db -> insert ('tb_candidaturas', $data);
+                return $this -> db -> insert_id();
+        }
+        public function create_alteracao_status($dados){
+                $data=array(
+                        'es_usuario' => $this -> session -> uid,
+                        'es_candidatura' => $dados['candidatura'],
+                        
+                        'dt_insercao' => date('Y-m-d H:i:s'),
+			'tx_justificativa' => $dados['justificativa']
+                );
+                $this -> db -> insert ('tb_alteracao_data', $data);
+                //echo $this -> db -> last_query();
                 return $this -> db -> insert_id();
         }
         public function salvar_resposta($dados, $questao){

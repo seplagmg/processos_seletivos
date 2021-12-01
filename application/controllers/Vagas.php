@@ -406,6 +406,55 @@ class Vagas extends CI_Controller {
                 $dados['total_paginas'] = ceil($dados['total2']/30);
                 $this -> load -> view('vagas', $dados);
         }
+        public function AlterarStatus(){
+                $this -> load -> model('Candidaturas_model');
+                $this -> load -> model('Usuarios_model');
+                if($this -> session -> perfil != 'sugesp' && $this -> session -> perfil != 'orgaos' && $this -> session -> perfil != 'administrador'){
+                        redirect('Interna/index');
+                }
+                $pagina['menu1']='Vagas';
+                $pagina['menu2']='AlterarStatus';
+                $pagina['url']='Vagas/AlterarStatus';
+                $pagina['nome_pagina']='Alterar o status para Candidatura Realizada';
+                $pagina['icone']='fa fa-thumb-tack';
+
+                $dados=$pagina;
+                $dados['adicionais'] = array('pickers' => true, 'inputmasks' => true, 'datatables' => true);
+
+                $candidatura = $this -> uri -> segment(3);
+                $dados_form = $this -> input -> post(null,true);
+
+                if(isset($dados_form['codigo']) && $dados_form['codigo'] > 0){
+                        $candidatura = $dados_form['codigo'];
+                }
+                
+                $dados['codigo'] = $candidatura;
+                $candidaturas = $this -> Candidaturas_model -> get_candidaturas($candidatura);
+                if($candidaturas[0] -> es_status != 8){
+                        redirect('Interna/index');
+                }
+                $dados['sucesso'] = '';
+                $dados['erro'] = '';
+
+                $this -> form_validation -> set_rules('justificativa', "'Justificativa'", 'required');
+                if ($this -> form_validation -> run() == FALSE){
+                        $dados['sucesso'] = '';
+                        $dados['erro'] = validation_errors();
+                }
+                else{
+                        $this -> Candidaturas_model -> update_candidatura('es_status',7,$candidatura);
+                        $dados_form['candidatura'] = $candidatura;
+
+                        $id = $this -> Candidaturas_model -> create_alteracao_status($dados_form);
+
+                        $this -> Usuarios_model -> log('sucesso', 'Vagas/AlterarStatus', "O status da candidatura {$candidatura} foi alterada com sucesso pelo usuário ".$this -> session -> uid, 'tb_alteracao_data', $id);
+
+                        $dados['sucesso'] = 'Status alterado com sucesso.<br/><br/><button class="btn btn-light"><a href="'.base_url('Vagas/resultado/'.$candidaturas[0] -> es_vaga).'">Voltar</a></button>';
+                        $dados['erro'] = '';
+                }
+
+                $this -> load -> view('vagas', $dados);
+        }
         public function resultado2(){
                 if($this -> session -> perfil != 'sugesp' && $this -> session -> perfil != 'orgaos' && $this -> session -> perfil != 'administrador'){
                         redirect('Interna/index');

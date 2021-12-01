@@ -1638,6 +1638,9 @@ else if($menu2 == 'resultado'){
                                                 if(strlen($linha -> es_avaliador_competencia1) == 0 && $this -> session -> perfil == 'orgaos' && $linha -> es_status == 10){
                                                         echo anchor('Vagas/JustificarNaoComparecimento/'.$linha -> pr_candidatura.'/'.$linha->es_vaga, '<i class="fa fa-lg mr-1 fa-times-circle"></i>Justificar não comparecimento a entrevista', " class=\"btn btn-sm btn-square btn-danger\" title=\"Justificar não comparecimento a entrevista\"");
                                                 }
+                                                if($linha -> es_status == 8){
+                                                        echo anchor('Vagas/AlterarStatus/'.$linha -> pr_candidatura, '<i class="fa fa-lg mr-1 fa-file-text"></i>Alterar status', " class=\"btn btn-sm btn-square btn-secondary\" title=\"Avaliar entrevista\"");
+                                                }
                                         }
 
                                         if($linha -> es_status == 10 && (($this -> session -> perfil == 'avaliador' ||$this -> session -> perfil == 'sugesp') && ($this -> session -> uid == $linha -> es_avaliador1 || $this -> session -> uid == $linha -> es_avaliador2 || $this -> session -> uid == $linha -> es_avaliador3)) && ($linha -> es_avaliador_competencia1 != $this -> session -> uid && $linha -> es_avaliador_competencia2 != $this -> session -> uid)){ //avaliador
@@ -1949,6 +1952,77 @@ echo "
                                             </script>
                                             ";
 
+}
+else if($menu2 == 'AlterarStatus'){
+        if(strlen($erro)>0){
+                echo "
+                                                                    <div class=\"alert alert-danger background-danger\" role=\"alert\">
+                                                                            <div class=\"alert-icon\">
+                                                                                    <i class=\"fa fa-exclamation-triangle\"></i>
+                                                                            </div>
+                                                                            <div class=\"alert-text\">
+                                                                                    <strong>ERRO</strong>:<br /> $erro
+                                                                            </div>
+                                                                    </div>";
+        //$erro='';
+        }
+        else if(strlen($sucesso) > 0){
+                echo "
+                                                                    <div class=\"alert alert-success background-success\" role=\"alert\">
+                                                                            <div class=\"alert-icon\">
+                                                                                    <i class=\"fa fa-check-circle\"></i>
+                                                                            </div>
+                                                                            <div class=\"alert-text\">
+                                                                                    $sucesso
+                                                                            </div>
+                                                                    </div>";
+        }
+        if(strlen($sucesso) == 0){
+                $attributes = array('class' => 'kt-form',
+                                    'id' => 'form_alteracao');
+                echo form_open($url, $attributes, array('codigo' => $codigo));
+                echo "
+                                                                            <div class=\"kt-portlet__body\">";
+                
+                
+                
+                
+                echo "
+                                                                                    <div class=\"form-group row\">";
+                                                                                    
+                $attributes = array('class' => 'col-lg-3 col-form-label direito');
+                echo form_label('Justificativa <abbr title="Obrigatório">*</abbr>', 'data', $attributes);
+                echo "
+                                                                                            <div class=\"col-lg-3\">";
+                $attributes = array('name' => 'justificativa',
+                                        'rows'=>'3',
+                                        'class' => 'form-control');
+                if(strstr($erro, "'Justificativa'")){
+                        $attributes['class'] = 'form-control is-invalid';
+                }
+                
+                echo form_textarea($attributes, set_value('justificativa'));
+                echo "
+                                                                                            </div>
+                                                                                    </div>";																	
+																					
+                echo form_fieldset_close();
+                echo "
+                                                                            </div>
+                                                                            <div class=\"j-footer\"><hr>
+                                                                                    <div class=\"kt-form__actions\">
+                                                                                            <div class=\"row\">
+                                                                                                    <div class=\"col-lg-12 text-center\">";
+                $attributes = array('class' => 'btn btn-primary');
+                echo form_submit('alterar_entrevista', 'Alterar', $attributes);
+                echo "
+                                                                                                            <button type=\"button\" class=\"btn btn-default\" onclick=\"window.location='".base_url('Vagas/resultado/'.$candidatura[0] -> es_vaga)."'\">Cancelar</button>
+                                                                                                    </div>
+                                                                                            </div>
+                                                                                    </div>
+                                                                            </div>
+                                                                    </form>";
+        }
 }
 else if($menu2 == 'resultado2'){
         echo "
