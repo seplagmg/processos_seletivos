@@ -1801,7 +1801,13 @@ if($this -> session -> perfil != 'candidato'){
                                                         <button class=\"tablinks primeiro active\" onclick=\"abreConteudo(event, 'nlkcompleta')\"><span class=\"pcoded-mclass\">Candidatura completa</span><span class=\"pcoded-micon\"><i class=\"fas fa-user-graduate\" style=\"margin-left: 11px; font-size:1.1em;\"></i></span></button>
                                                         <hr class=\"m-0 p-0\" style=\"border:none;\">
                                                         <button class=\"tablinks\" onclick=\"abreConteudo(event, 'nlkavaliacao')\"><span class=\"pcoded-mclass\">Avaliação</span><span class=\"pcoded-micon\"><i class=\"fas fa-tasks\" style=\"margin-left: 12px; font-size:1.3em\"></i></span></button>
-                                                        <button class=\"tablinks\" onclick=\"abreConteudo(event, 'nlkentrevista')\"><span class=\"pcoded-mclass\">Entrevista</span><span class=\"pcoded-micon\"><i class=\"fas fa-user-tie\" style=\"margin-left: 12px; font-size:1.1em\"></i></span></button>
+                                                        <button class=\"tablinks\" onclick=\"abreConteudo(event, 'nlkentrevista')\"><span class=\"pcoded-mclass\">Entrevista</span><span class=\"pcoded-micon\"><i class=\"fas fa-user-tie\" style=\"margin-left: 12px; font-size:1.1em\"></i></span></button>";
+        if($this -> session -> perfil != 'avaliador'){                                                 
+                echo "
+                                                        <button class=\"tablinks\" onclick=\"abreConteudo(event, 'nlkalteracao')\"><span class=\"pcoded-mclass\">Alterações de status</span><span class=\"pcoded-micon\"><i class=\"fas fa-user-tie\" style=\"margin-left: 12px; font-size:1.1em\"></i></span></button>";
+        }
+                                                        
+        echo "
                                                     </div>
                                                 </div>";
 }
@@ -2661,12 +2667,70 @@ echo "                                                      <h3 style=\"font-wei
 
 
                                                                 } else {
-                                                                echo "<span class=\"my-3\" style=\"line-height:1.5em;\">Sem dados de avaliação de entrevista.</span>";
+                                                                        echo "<span class=\"my-3\" style=\"line-height:1.5em;\">Sem dados de avaliação de entrevista.</span>";
                                                                 }
 
-echo "                                                      </div>";
+        echo "                                                      </div>";
 // Fim Pré Requisitos
 }// Fim da verificação de perfil
+
+// Alterações de status
+if($this -> session -> perfil != 'avaliador'){ 
+echo "                                                      <div class=\"menu1conteudo\" id=\"nlkalteracao\">";
+echo "                                                      <h3 style=\"font-weight:600; margin-bottom:25px;\"><i class=\"fas fa-user-tie\" style=\"font-size:0.9em;\"></i> &nbsp; Alterações de status</h3>";
+                                                                        
+                                                            if($alteracoes){
+                                                                    
+                                                                        
+                                                                        
+                                                                        
+                                                                       
+                                                                        
+
+                                                                        echo "
+                                                                                                                                            <div class=\"kt-separator kt-separator--border-dashed kt-separator--space-lg\"></div>";
+                                                                        
+                                                                        foreach($alteracoes as $alteracao){
+                                                                                $alteracao -> dt_insercao = str_replace(" ","T",$alteracao -> dt_insercao);
+                                                                                echo "
+                                                                <fieldset>
+                                                                        
+                                                                        <div class=\"form-group row\">
+                                                                                <div class=\"col-lg-12\"><label for=\"data_alteracao".$alteracao -> pr_alteracao."\" class=\"esquerdo control-label\">Data</label> 
+                                                                                        <br><input type=\"datetime-local\" name=\"data_alteracao".$alteracao -> pr_alteracao."\" value=\"".$alteracao -> dt_insercao."\" class=\"form-control text-box single-line\" disabled=\"disabled\">
+
+                                                                                </div>
+                                                                        </div>
+                                                                
+                                                                        <div class=\"form-group row\">
+                                                                                <div class=\"col-lg-12\"><label for=\"responsavel".$alteracao -> pr_alteracao."\" class=\"esquerdo control-label\">Responsável</label> 
+                                                                                        <br><input type=\"text\" name=\"responsavel".$alteracao -> pr_alteracao."\" value=\"".$alteracao -> vc_nome."\" class=\"form-control text-box single-line\" disabled=\"disabled\">
+
+                                                                                </div>
+                                                                        </div>
+                                                                        
+                                                                        <div class=\"form-group row\">
+                                                                                <div class=\"col-lg-12\"><label for=\"justificativa".$alteracao -> pr_alteracao."\" class=\"esquerdo control-label\">Justificativa</label> 
+                                                                                        <br><br><textarea name=\"justificativa".$alteracao -> pr_alteracao."\" cols=\"40\" rows=\"4\" class=\"form-control\" disabled=\"disabled\">".$alteracao -> tx_justificativa."</textarea>
+
+                                                                                </div>
+                                                                        </div>
+                                                                </fieldset>
+                                                                                ";
+                                                                        }
+                                                                        echo form_fieldset_close();
+                                                                        echo "
+                                                                                                                                            <div class=\"kt-separator kt-separator--border-dashed kt-separator--space-lg\"></div>";
+                                                                                        
+
+                                
+                                                                } else {
+                                                                echo "<span class=\"my-3\" style=\"line-height:1.5em;\">Sem dados de avaliação de entrevista.</span>";
+                                                                }
+    
+echo "                                                      </div>";
+}
+
 
                                                 if($this -> session -> perfil == 'candidato'){
 														echo "                                                                                          <div class=\"row\">

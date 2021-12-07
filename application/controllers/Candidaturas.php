@@ -1467,7 +1467,7 @@ class Candidaturas extends CI_Controller {
 
                 $this -> load -> view('avaliacoes', $dados);
         }
-	public function DetalheAvaliacao($id_candidatura,$link=null){ //lista de candidaturas - perfil gestores e avaliador
+	public function DetalheAvaliacao($id_candidatura,$link=null){ //detalhes da candidatura - perfil gestores e avaliador
                 if($this -> session -> perfil != 'avaliador' && $this -> session -> perfil != 'sugesp' && $this -> session -> perfil != 'orgaos' && $this -> session -> perfil != 'administrador' && $this -> session -> perfil != 'candidato'){
                         redirect('Interna/index');
                 }
@@ -1494,9 +1494,11 @@ class Candidaturas extends CI_Controller {
                 $dados=$pagina;
                 if($this -> session -> perfil == 'avaliador'){
                         $candidatura = $this -> Candidaturas_model -> get_candidaturas($id_candidatura,'','','','', $this -> session -> uid);
+                        $dados['alteracoes'] = array();
                 }
                 else{
                         $candidatura = $this -> Candidaturas_model -> get_candidaturas($id_candidatura);
+                        $dados['alteracoes'] = $this -> Candidaturas_model ->get_alteracao_status('',$id_candidatura);
                 }
 
                 if($id_candidatura == "Interna"){

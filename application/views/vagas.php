@@ -1995,6 +1995,7 @@ else if($menu2 == 'AlterarStatus'){
                 echo "
                                                                                             <div class=\"col-lg-3\">";
                 $attributes = array('name' => 'justificativa',
+                                        'id' => 'justificativa',
                                         'rows'=>'3',
                                         'class' => 'form-control');
                 if(strstr($erro, "'Justificativa'")){
@@ -2022,6 +2023,11 @@ else if($menu2 == 'AlterarStatus'){
                                                                                     </div>
                                                                             </div>
                                                                     </form>";
+                $pagina['js'] .= "
+                                                                    <script type=\"text/javascript\">
+                                                                            dCounts('justificativa',4000);
+                                                                    </script>
+                                                                    ";
         }
 }
 else if($menu2 == 'resultado2'){

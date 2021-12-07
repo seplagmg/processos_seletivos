@@ -419,7 +419,7 @@ class Vagas extends CI_Controller {
                 $pagina['icone']='fa fa-thumb-tack';
 
                 $dados=$pagina;
-                $dados['adicionais'] = array('pickers' => true, 'inputmasks' => true, 'datatables' => true);
+                $dados['adicionais'] = array('pickers' => true, 'inputmasks' => true, 'datatables' => true,'dcountjs'=> true);
 
                 $candidatura = $this -> uri -> segment(3);
                 $dados_form = $this -> input -> post(null,true);

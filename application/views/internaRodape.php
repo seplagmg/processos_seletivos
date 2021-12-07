@@ -178,6 +178,11 @@ if(isset($adicionais['select2'])){
         <script type=\"text/javascript\" src=\"".base_url('bower_components\select2\js\select2.full.min.js')."\"></script>";
 }
 
+if(isset($adicionais['dcountjs'])){
+    echo "
+        <!-- dcounts-js.js -->
+        <script type=\"text/javascript\" src=\"".base_url('bower_components\dCountsjs\src\dcounts-js.js')."\"></script>";
+}
 if(isset($adicionais['calendar'])){
         echo "
         <!-- calendar js -->

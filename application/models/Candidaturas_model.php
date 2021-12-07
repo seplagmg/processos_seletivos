@@ -114,6 +114,39 @@ class Candidaturas_model extends CI_Model {
                 $this -> db -> insert ('tb_candidaturas', $data);
                 return $this -> db -> insert_id();
         }
+        public function get_alteracao_status($id='', $candidatura='',$vaga=''){
+                if(strlen($id) > 0 && $id > 0){
+                        $this -> db -> where('a.pr_alteracao', $id);
+                }
+                if(strlen($candidatura) > 0){
+                        $this -> db -> where('a.es_candidatura', $candidatura);
+                }
+                if(strlen($vaga) > 0){
+                        $this -> db -> where('c.es_vaga', $vaga);
+                        $this -> db -> select('a.*,u.vc_nome as nome_responsavel,ca.vc_nome as nome_candidato');
+                }
+                else{
+                        $this -> db -> select('a.*,u.vc_nome');
+                }
+                
+                $this -> db -> from('tb_alteracao_data a');
+                $this -> db -> join('tb_usuarios u', 'a.es_usuario=u.pr_usuario');
+                if(strlen($vaga) > 0){
+                        $this -> db -> join('tb_candidaturas c', 'a.es_candidatura=u.pr_candidatura');
+                        $this -> db -> join('tb_candidatos ca', 'c.es_candidato=ca.pr_candidato');
+                }
+                
+                $this->db->order_by('a.dt_insercao', 'DESC');
+
+                $query = $this -> db -> get();
+                //echo $this -> db -> last_query();
+                if($query -> num_rows() > 0){
+                        return $query -> result();
+                }
+                else{
+                        return NULL;
+                }
+        }
         public function create_alteracao_status($dados){
                 $data=array(
                         'es_usuario' => $this -> session -> uid,
